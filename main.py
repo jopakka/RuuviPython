@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import asyncio
 from Database import Database
 from Scanner import Scanner
