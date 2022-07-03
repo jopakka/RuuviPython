@@ -23,14 +23,14 @@ class Scanner:
 
             if self.__db:
                 row = self.__db.insertMeasurement((now, mac, temp, humidity, atmosphericPressure))
-                print("row", row)
+                # print("row", row)
 
-            print("time", now.strftime("%H:%M:%S"))
-            print("mac", mac)
-            print("temp", temp)
-            print("humidity", humidity)
-            print("atmosphericPressure", atmosphericPressure)
-            print("")
+            # print("time", now.strftime("%H:%M:%S"))
+            # print("mac", mac)
+            # print("temp", temp)
+            # print("humidity", humidity)
+            # print("atmosphericPressure", atmosphericPressure)
+            # print("")
 
     async def startScanning(self, interval: float = 5):
         while True:
