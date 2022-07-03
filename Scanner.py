@@ -1,14 +1,12 @@
 import asyncio
-from functools import partial
 from bleak import BleakScanner
 from datetime import datetime
-from Database import Database
 
 class Scanner:
-    __device_mac = "EC:0E:A4:EB:60:3A"
-    __db: Database = None
+    __db = None
 
-    def __init__(self):
+    def __init__(self, db):
+        self.__db = db
         pass
 
     def __hexToInt(self, hexValue):
@@ -24,7 +22,7 @@ class Scanner:
             atmosphericPressure = round((self.__hexToInt(data[10:14]) + 50000) / 100, 2)
 
             if self.__db:
-                row = self.__db.insert_measurement((now, device.address, temp, humidity, atmosphericPressure))
+                row = self.__db.insertMeasurement((now, mac, temp, humidity, atmosphericPressure))
                 print("row", row)
 
             print("time", now.strftime("%H:%M:%S"))
@@ -34,9 +32,8 @@ class Scanner:
             print("atmosphericPressure", atmosphericPressure)
             print("")
 
-    async def startScanning(self, db: Database, sleep = 5.0):
-        self.__db = db
+    async def startScanning(self, interval: float = 5):
         while True:
             async with BleakScanner() as scanner:
                 scanner.register_detection_callback(self.__detection_callback)
-                await asyncio.sleep(sleep)
+                await asyncio.sleep(interval)
