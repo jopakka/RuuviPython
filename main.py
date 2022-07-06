@@ -11,7 +11,7 @@ async def main():
         db = None
 
     scanner = Scanner(db)
-    await scanner.startScanning()
+    await scanner.startScanning(60 * 15)
 
 if __name__ == "__main__":
     asyncio.run(main())
