@@ -32,7 +32,8 @@ class Scanner:
             # print("atmosphericPressure", atmosphericPressure)
             # print("")
 
-    async def startScanning(self, interval: float = 5):
+    async def startScanning(self, interval = 15):
+        print("Starts scanning")
         while True:
             async with BleakScanner() as scanner:
                 scanner.register_detection_callback(self.__detection_callback)
