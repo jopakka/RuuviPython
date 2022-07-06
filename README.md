@@ -35,4 +35,5 @@ DB_PORT=DB PORT HERE
 ## Usage
 ```
 ./main.py
+./main.py 120 // time between scans
 ```

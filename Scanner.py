@@ -1,4 +1,5 @@
 import asyncio
+import time
 from bleak import BleakScanner
 from datetime import datetime
 
@@ -34,7 +35,13 @@ class Scanner:
 
     async def startScanning(self, interval = 15):
         print("Starts scanning")
+        scanner = BleakScanner()
+        scanner.register_detection_callback(self.__detection_callback)
+        scanTime = 5
+        waitTime = interval - scanTime if interval - scanTime > 0 else 0
+        print(f"Scan interval: {waitTime + scanTime}s")
         while True:
-            async with BleakScanner() as scanner:
-                scanner.register_detection_callback(self.__detection_callback)
-                await asyncio.sleep(interval)
+            await scanner.start()
+            await asyncio.sleep(scanTime)
+            await scanner.stop()
+            await asyncio.sleep(waitTime)
