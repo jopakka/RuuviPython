@@ -21,6 +21,17 @@ CREATE DATABASE ruuvi; // Or any name you want
 pip3 install -r requirements.txt 
 ```
 
+### Next steps
+- Rename .env-example to .env
+- Fill .env with correct information
+```
+DB_HOST=ENTER YOUR DB URL HERE
+DB_NAME=DB NAME HERE WHICH YOU CREATED EARLIER
+DB_USER=DB USERNAME HERE
+DB_PASSWORD=DB USERNAMES PASSWORD HERE
+DB_PORT=DB PORT HERE
+```
+
 ## Usage
 ```
 ./main.py
