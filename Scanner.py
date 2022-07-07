@@ -15,7 +15,6 @@ class Scanner:
 
     def __detection_callback(self, device, advertisement_data):
         if 1177 in advertisement_data.manufacturer_data:
-            now = datetime.now()
             mac = device.address
             data = advertisement_data.manufacturer_data[1177].hex()
             temp = round(self.__hexToInt(data[2:6]) * 0.005, 2)
@@ -23,10 +22,9 @@ class Scanner:
             atmosphericPressure = round((self.__hexToInt(data[10:14]) + 50000) / 100, 2)
 
             if self.__db:
-                row = self.__db.insertMeasurement((now, mac, temp, humidity, atmosphericPressure))
+                row = self.__db.insertMeasurement((mac, temp, humidity, atmosphericPressure))
                 # print("row", row)
 
-            # print("time", now.strftime("%H:%M:%S"))
             # print("mac", mac)
             # print("temp", temp)
             # print("humidity", humidity)

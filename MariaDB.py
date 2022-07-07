@@ -11,7 +11,7 @@ class MariaDB():
         """CREATE TABLE IF NOT EXISTS measurements(
             id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
             mac VARCHAR(17) NOT NULL,
-            timestamp TIMESTAMP NOT NULL,
+            timestamp TIMESTAMP NOT NULL DEFAULT NOW(),
             temperature FLOAT NOT NULL,
             humidity FLOAT NOT NULL,
             pressure FLOAT NOT NULL
@@ -54,8 +54,8 @@ class MariaDB():
             self.__cursor.execute(table)
 
     def insertMeasurement(self, measurement):
-        sql = """INSERT INTO measurements(timestamp, mac, temperature, humidity, pressure)
-            VALUES(?, ?, ?, ?, ?)"""
+        sql = """INSERT INTO measurements(mac, temperature, humidity, pressure)
+            VALUES(?, ?, ?, ?)"""
         self.__cursor.execute(sql, measurement)
         self.__conn.commit()
         return self.__cursor.lastrowid
